@@ -1,15 +1,18 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import dayjs from 'dayjs'
+// https://www.lanqiao.cn/courses/3097/learning/?id=74991
 import 'lib-flexible/flexible'
 import router from './router'
-import { Button, Tabbar, TabbarItem, Form, Field, Icon, NavBar, Cell, CellGroup, Popup, List, PullRefresh, DatetimePicker, NumberKeyboard, Dialog, Progress, Rate, Divider } from 'vant';
 import 'vant/lib/index.css'; // 全局引入样式
 import './index.css'
+import useVant from '@/useVant'
+import moment from 'moment'
 
+// 创建实例
 const app = createApp(App)
 
-// 全局过滤器
+// 在Vue.prototype上绑定 全局过滤器
 app.config.globalProperties.$filters = {
   transTime(date) {
     return dayjs(Number(date)).format('HH:mm')
@@ -21,25 +24,17 @@ app.config.globalProperties.$filters = {
     return dayjs(value).format('YYYY-MM-DD HH:mm')
   }
 }
+/**
+ * use:  this.$moment
+ */
+app.config.globalProperties.$moment=moment
+/**
+ * use: this.$fakedata
+ * @type {boolean}
+ */
+app.config.globalProperties.$fakedata=false
 
 app.use(router)
-app.use(Tabbar);
-app.use(TabbarItem);
-app.use(Form)
-app.use(Field)
-app.use(Button) // 注册组件
-app.use(Icon)
-app.use(NavBar)
-app.use(CellGroup)
-app.use(Cell)
-app.use(Popup)
-app.use(List)
-app.use(PullRefresh)
-app.use(DatetimePicker)
-app.use(NumberKeyboard)
-app.use(Dialog)
-app.use(Progress)
-app.use(Rate)
-app.use(Divider)
+useVant(app)
 
 app.mount('#app')

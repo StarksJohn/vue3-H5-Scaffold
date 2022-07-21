@@ -3,7 +3,7 @@
     v-model:show="show"
     position="bottom"
     round
-    
+
   >
     <div class="pop">
       <div class="header van-hairline--bottom">
@@ -41,11 +41,12 @@ export default {
     })
     // 请求标签接口放在弹窗内，这个弹窗可能会被复用，所以请求如果放在外面，会造成代码冗余。
     onMounted(async () => {
+      console.log('PopType.vue onMounted get')
       const { data: { list } } = await axios.get('/type/list')
       state.expense = list.filter(i => i.type == 1)
       state.income = list.filter(i => i.type == 2)
     })
-    
+
     const toggle = () => {
       state.show = !state.show
     }

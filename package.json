@@ -6,13 +6,17 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
   },
+  "homepage": "https://github.com/StarksJohn/vue3-H5-Scaffold",
   "dependencies": {
     "axios": "^0.21.1",
+    "axios-tools": "^2.0.8",
     "core-js": "^3.6.5",
     "dayjs": "^1.9.8",
     "echarts": "^5.0.0",
     "lib-flexible": "^0.3.2",
+    "moment": "^2.29.4",
     "pushstate-server": "^3.1.0",
+    "starkfrontendtools": "^0.0.30",
     "vant": "^3.0.1",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0"

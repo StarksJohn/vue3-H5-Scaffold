@@ -1,16 +1,14 @@
 import { defineAsyncComponent } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory ,createWebHistory/*history 模式*/} from 'vue-router'
 import Home from '../views/Home.vue'
-// import Data from '../views/Data.vue'
-// import User from '../views/User.vue'
-// import Login from '../views/Login.vue'
-// import Detail from '../views/Detail.vue'
-// import About from '../views/About.vue'
-// import Account from '../views/Account.vue'
 
-// createRouter 创建路由实例
+/**
+ * createRouter 创建路由实例
+ * use: 在 setup函数或者use函数中可用 const router = useRouter(), 在其他地方则只能用 此文件的实例,也就是 import router from '@/router'
+ * @type {Router}
+ */
 const router = createRouter({
-  history: createWebHashHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
+  history: createWebHistory(), // hash模式：createWebHashHistory，history模式：createWebHistory
   routes: [
     {
       path: '/',

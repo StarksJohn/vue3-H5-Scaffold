@@ -70,12 +70,14 @@ export default {
         state.list = []
         state.refreshing = false
       }
-      state.loading = false
-      state.list = state.list.concat(data.list)
-      state.totalExpense = data.totalExpense.toFixed(2)
-      state.totalIncome = data.totalIncome.toFixed(2)
-      state.totalPage = data.totalPage
-      if (state.page >= state.totalPage) state.finished = true
+      if (!this.$fakedata) {
+        state.loading = false
+        state.list = state.list.concat(data.list)
+        state.totalExpense = data.totalExpense.toFixed(2)
+        state.totalIncome = data.totalIncome.toFixed(2)
+        state.totalPage = data.totalPage
+        if (state.page >= state.totalPage) state.finished = true
+      }
     }
 
     const onLoad = () => {

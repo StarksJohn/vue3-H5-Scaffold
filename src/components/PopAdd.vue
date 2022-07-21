@@ -105,6 +105,7 @@ export default {
     })
 
     onMounted(async () => {
+      console.log('PopAdd.vue onMounted get')
       const { data: { list } } = await axios.get('/type/list')
       state.expense = list.filter(i => i.type == 1)
       state.income = list.filter(i => i.type == 2)
