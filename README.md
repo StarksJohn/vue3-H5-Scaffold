@@ -4,6 +4,7 @@ vue3 用于 H5项目的 脚手架
 
 分支: 
 
-    main  基于vite 创建
+    main  基于vite+JS 
+    vue cli 基于 vuecli+TS
 1. Debug: yarn serve ,  账号密码: admin  111111
 2. 代码提交:  git commit -a -s -m 'add' && git push origin main
