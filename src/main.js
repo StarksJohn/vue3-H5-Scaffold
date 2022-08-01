@@ -12,7 +12,15 @@ import moment from 'moment'
 // 创建实例
 const app = createApp(App)
 
-// 在Vue.prototype上绑定 全局过滤器
+//
+/*
+在Vue.prototype上绑定 全局过滤器
+use:
+  1: 在 <template> 里 直接 用 {{ $filters.transDay(date) }}
+  2: 在 setup 方法里,
+    const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+    console.log(globalProperties?.$filter.bar())
+ */
 app.config.globalProperties.$filters = {
   transTime(date) {
     return dayjs(Number(date)).format('HH:mm')

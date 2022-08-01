@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { reactive, ref, toRefs } from 'vue'
+import { reactive, ref, toRefs ,getCurrentInstance} from 'vue'
 import CardItem from '../components/CardItem.vue'
 import PopType from '../components/PopType.vue'
 import PopMonth from '../components/PopMonth.vue'
@@ -48,6 +48,9 @@ export default {
     PopAdd
   },
   setup() {
+    const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+    console.log('setup globalProperties=',globalProperties)
+
     const popRef = ref(null)
     const popMonthRef = ref(null)
     const popAddRef = ref(null)
@@ -70,7 +73,9 @@ export default {
         state.list = []
         state.refreshing = false
       }
-      if (!this.$fakedata) {
+      console.log('getBillList globalProperties=',globalProperties)
+
+      if (!globalProperties.$fakedata) {
         state.loading = false
         state.list = state.list.concat(data.list)
         state.totalExpense = data.totalExpense.toFixed(2)
