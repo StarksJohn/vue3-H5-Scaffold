@@ -48,6 +48,11 @@ const router = createRouter({
       path: '/account',
       name: 'Account',
       component: () => import(/* webpackChunkName: "account" */ '../views/Account.vue')
+    },
+    {
+      path: '/vue3JScodeTemp',
+      name: 'vue3JScodeTemp',
+      component: () => import(/* webpackChunkName: "account" */ '../vue3JScodeTemp.vue')
     }
   ]
 })

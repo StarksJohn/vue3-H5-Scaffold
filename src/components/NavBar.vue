@@ -3,6 +3,7 @@
     <van-tabbar-item name="/home" icon="notes-o" @click="link('/home')">明细</van-tabbar-item>
     <van-tabbar-item name="/data" icon="bar-chart-o" @click="link('/data')">统计</van-tabbar-item>
     <van-tabbar-item name="/user" icon="user-o" @click="link('/user')">我的</van-tabbar-item>
+    <van-tabbar-item name="/test" icon="user-o" @click="link('/vue3JScodeTemp')">VUE3模板</van-tabbar-item>
   </van-tabbar>
 </template>
 
@@ -42,5 +43,5 @@ export default {
   @import url('../config/custom.less');
   .van-tabbar-item--active {
     color: @primary!important;
-  } 
+  }
 </style>

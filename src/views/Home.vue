@@ -47,7 +47,8 @@ export default {
     PopMonth,
     PopAdd
   },
-  setup() {
+  setup(props,ctx) {
+    console.log('Home.vue setup ctx=',ctx)
     const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
     console.log('setup globalProperties=',globalProperties)
 

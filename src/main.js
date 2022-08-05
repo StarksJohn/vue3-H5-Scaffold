@@ -8,6 +8,7 @@ import 'vant/lib/index.css'; // 全局引入样式
 import './index.css'
 import useVant from '@/useVant'
 import moment from 'moment'
+import store from "./store";
 
 // 创建实例
 const app = createApp(App)
@@ -44,5 +45,6 @@ app.config.globalProperties.$fakedata=false
 
 app.use(router)
 useVant(app)
+app.use(store);
 
 app.mount('#app')

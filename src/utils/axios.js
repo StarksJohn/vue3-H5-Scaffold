@@ -26,6 +26,8 @@ axios.interceptors.response.use(res => {
 })
 export default axios
 
+
+//暂时不用 axios-tools ,因会导致死循环请求
 // const baseURL = process.env.NODE_ENV == 'development' ? '/api' : '//47.99.134.126:7008/api'
 // export default {
 //   get: (url, params) => {
