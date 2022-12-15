@@ -111,7 +111,7 @@ export default {
       state.income = list.filter(i => i.type == 2)
       // 没有 id 的情况下，说明是新建账单。
       if (!id) {
-        state.currentType = state.expense[0] 
+        state.currentType = state.expense[0]
       }
     })
 
@@ -130,6 +130,7 @@ export default {
 
     // 删除输入框内容
     const remove = () => {
+      // 通过 slice 过滤处字符串 0 到 字符串长度 - 1 的值，也就是除去了最后一个值
       state.amount = state.amount.slice(0, state.amount.length - 1)
     }
 
@@ -279,6 +280,7 @@ export default {
         padding-left: 10px;
       }
     }
+    //为了实现模拟输入框光标闪烁的效果
     .animation::after {
       content:'';
       display: inline-block;

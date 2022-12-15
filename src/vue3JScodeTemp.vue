@@ -26,7 +26,10 @@ export default {
   name: 'vue3JScodeTemp',
   components: {},
   props: {
-    count: Number,
+    count: {
+      type: Number,
+      default: -1
+    },
   },
   //子组件接收的方法，需要通过 emits 在 options 中注册，否则会报警告,通过上下文 ctx.emit 触发传进来的方法以及返回相应的回调参数
   emits: [''],

@@ -19,7 +19,7 @@ export default {
   },
   setup() {
     const router = useRouter()
-    
+
     // 返回方法
     const back = () => {
       router.back()
@@ -33,15 +33,19 @@ export default {
 </script>
 
 <style lang='less' scoped>
+@import url('../config/custom.less');
+
   .block {
     width: 100%;
-    height: 46px;
+    height: @headerh;
+    background-color: #4b67e2;
   }
   .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    //height:46px;//https://vant-contrib.gitee.io/vant/v2/#/en-US/nav-bar  默认 @nav-bar-height =46px
     .more {
       font-size: 20px;
     }

@@ -19,7 +19,11 @@ export default {
       show: false
     })
     const router = useRouter()
-    router.afterEach(() => {
+    router.afterEach((to, from, failure) => {
+      console.log('App.vue router.afterEach from=',from)
+      console.log('App.vue router.afterEach to=',to)
+      console.log('App.vue router.afterEach failure=',failure)
+
       // menu 内的路径都是需要展示底部导航栏的
       state.show = state.menu.includes(router.currentRoute.value.path)
     })

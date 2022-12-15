@@ -178,9 +178,10 @@ export default {
 <style lang='less' scoped>
   @import url('../config/custom.less');
   .auth {
-    height: calc(~"(100% - 46px)");
+    height: calc(~"(100% - 46px)");//动态的计算出页面的高度
+    //overflow: hidden;
     padding: 30px 20px 0 20px;
-    background: @primary-bg;
+    //background: @link-color;
     .logo {
       width: 150px;
       display: block;
