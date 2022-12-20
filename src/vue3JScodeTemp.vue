@@ -55,10 +55,8 @@ export default {
     const store = useStore()
     const vuexState = store.state
     const add = () => {
-      store.dispatch('add', 1)
     }
     const min = () => {
-      store.dispatch('min', 1)
     }
     const getUserInfo = () => {
       store.dispatch('getUserInfo')

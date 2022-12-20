@@ -11,6 +11,13 @@ module.exports = {
         style: name => `${name}/style/less`
       },
       'vant',
+    ],
+    [
+      'babel-plugin-root-import',
+      {
+        rootPathPrefix: '@', // `@` 默认
+        rootPathSuffix: 'src'
+      }
     ]
   ]
 }

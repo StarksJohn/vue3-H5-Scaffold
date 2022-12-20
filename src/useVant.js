@@ -1,4 +1,4 @@
-import { Button, Tabbar, TabbarItem, Form, Field, Icon, NavBar, Cell, CellGroup, Popup, List, PullRefresh, DatetimePicker, NumberKeyboard, Dialog, Progress, Rate, Divider } from 'vant';
+import { Button, Tabbar, TabbarItem, Form, Field, Icon, NavBar, Cell, CellGroup, Popup, List, PullRefresh, DatetimePicker, NumberKeyboard, Dialog, Progress, Rate, Divider,Picker,RadioGroup, Radio ,Overlay , PasswordInput ,Area, Uploader,Swipe,SwipeItem,} from 'vant';
 
 // 注册vant组件
 export default function (app) {
@@ -20,4 +20,13 @@ export default function (app) {
   app.use(Progress)
   app.use(Rate)
   app.use(Divider)
+  app.use(Picker)
+  app.use(Radio);
+  app.use(RadioGroup);
+  app.use(Overlay);
+  app.use(PasswordInput);
+  app.use(Area);
+  app.use(Uploader);
+  app.use(Swipe);
+  app.use(SwipeItem);
 }

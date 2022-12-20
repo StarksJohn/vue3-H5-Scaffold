@@ -149,6 +149,7 @@ export default {
 @import url('../config/custom.less');
 
 .home {
+  background-color: #4b67e2;
   height: 100%;
   display: flex;
   flex-direction: column;

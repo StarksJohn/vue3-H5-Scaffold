@@ -9,18 +9,25 @@ import './index.css'
 import useVant from '@/useVant'
 import moment from 'moment'
 import store from "./store";
+import assets from '@/assets/index.js'
+import VConsole from 'vconsole'
+if (process.env.NODE_ENV === 'development') {
+  new VConsole()
+}
 
 // 创建实例
 const app = createApp(App)
 
-//
+
 /*
 在Vue.prototype上绑定 全局过滤器
 use:
   1: 在 <template> 里 直接 用 {{ $filters.transDay(date) }}
   2: 在 setup 方法里,
+    import { getCurrentInstance } from 'vue'
     const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
     console.log(globalProperties?.$filter.bar())
+  3 坑: getCurrentInstance 方法 无法再 setup 外部调用到数据,也无法在setup内部定义的方法里调用 ,故 只能把全局变量挂到 window 上
  */
 app.config.globalProperties.$filters = {
   transTime(date) {
@@ -34,14 +41,18 @@ app.config.globalProperties.$filters = {
   }
 }
 /**
- * use:  this.$moment
+ 借鉴 $filters
  */
 app.config.globalProperties.$moment=moment
+app.config.globalProperties.$assets=assets
 /**
- * use: this.$fakedata
- * @type {boolean}
+ * 配置全局变量 页面中使用 inject 接收
+ * 坑: 用 provide + inject 的 全局变量无法再 setup 外部调用到数据,也无法在setup内部定义的方法里调用到数据 ,只能把全局变量挂到 window 上
  */
-app.config.globalProperties.$fakedata=false
+app.provide('global',{
+  'fakedata':true,
+})
+window.$fakedata=true
 
 app.use(router)
 useVant(app)

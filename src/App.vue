@@ -7,16 +7,25 @@
 <script>
 import NavBar from './components/NavBar.vue';
 import { useRouter } from 'vue-router'
-import { reactive, toRefs, watch } from 'vue'
+import { reactive,onMounted, toRefs, watch } from 'vue'
+import { useStore } from 'vuex'
+import { tool } from 'starkfrontendtools';
+// import vuexState from '@/store/state'
+
 export default {
   name: 'App',
   components: {
     NavBar
   },
   setup() {
+    const vuexState = useStore().state
     const state = reactive({
-      menu: ['/user', '/home', '/data','/vue3JScodeTemp'],
+      menu: [vuexState.routerPath.home,vuexState.routerPath.data,vuexState.routerPath.user,'/vue3JScodeTemp'],
       show: false
+    })
+    onMounted(() => {
+      // 禁止被手势缩放 https://blog.csdn.net/rxh13543515695/article/details/119798451
+     tool.noGestures()
     })
     const router = useRouter()
     router.afterEach((to, from, failure) => {

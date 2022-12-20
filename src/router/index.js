@@ -1,10 +1,18 @@
-import { defineAsyncComponent } from 'vue'
-import { createRouter, createWebHashHistory ,createWebHistory/*history 模式*/} from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory/*history 模式*/ } from 'vue-router'
 import Home from '../views/Home.vue'
+import state from '@/store/state'
+
+export const routerPath = state.routerPath
+import store from '@/store'
 
 /**
  * createRouter 创建路由实例
- * use: 在 setup函数或者use函数中可用 const router = useRouter(), 在其他地方则只能用 此文件的实例,也就是 import router from '@/router'
+ * use:
+ *  1 在 setup() 外使用时, 用 import router from '@/router'
+ *  2 在 setup() 内使用时, 用 import { useRouter } from 'vue-router'
+ *    setup (props, ctx) {
+           const router = useRouter()
+        }
  * @type {Router}
  */
 const router = createRouter({
@@ -12,32 +20,32 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: routerPath.home
     },
     {
-      path: '/home',
+      path: routerPath.home,
       name: 'Home',
-      component: Home
+      component: Home, meta: { requiresAuth: true }
     },
     {
-      path: '/data',
+      path: routerPath.data,
       name: 'Data',
       component: () => import(/* webpackChunkName: "data" */ '../views/Data.vue')
     },
     {
-      path: '/user',
+      path: routerPath.user,
       name: 'User',
       component: () => import(/* webpackChunkName: "user" */ '../views/User.vue')
     },
     {
-      path: '/login',
+      path: routerPath.login,
       name: 'Login',
-      component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+      component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'), meta: { requiresAuth: false }
     },
     {
       path: '/detail',
       name: 'Detail',
-      component: () => import(/* webpackChunkName: "detail" */ '../views/Detail.vue')
+      component: () => import(/* webpackChunkName: "detail" */ '../views/Detail.vue'),
     },
     {
       path: '/about',
@@ -55,6 +63,31 @@ const router = createRouter({
       component: () => import(/* webpackChunkName: "account" */ '../vue3JScodeTemp.vue')
     }
   ]
+})
+
+/**
+ * 全局守卫
+ */
+router.beforeEach((to, from, next) => {
+  console.log('router.beforeEach from=', from)
+  console.log('router.beforeEach to=', to)
+  console.log('router.beforeEach store=', store)
+  console.log('router.beforeEach state=', state)
+  if (to.meta.requiresAuth && !sessionStorage.getItem('token')) {// 此路由需要授权，请检查是否已登录;
+    //https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%85%A8%E5%B1%80%E5%89%8D%E7%BD%AE%E5%AE%88%E5%8D%AB
+    console.log('router beforeEach 未登录,重定向到登录页面')
+    // {
+    //   router.replace({ path: routerPath.login, query: { redirect: to.fullPath } })
+    //   return false //  不要 return false,否则 控制台里报错  Error: Invalid navigation guard
+    // }
+    next({
+      path: routerPath.login,
+      // 保存我们所在的位置，以便以后再来
+      query: { redirect: to.fullPath },
+    })
+  } else {
+    next()
+  }
 })
 
 export default router

@@ -10,6 +10,7 @@
 <script>
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+//底部导航栏
 export default {
   name: 'NavBar',
   props: {

@@ -24,7 +24,7 @@ vue3+JS 用于 H5 项目的 脚手架
     8 add  .env.xxx 文件
     9 解决浏览器缓存的坑: https://blog.csdn.net/qq_39041201/article/details/123209761
 
-uat:
+uat: 账号密码: admin  111111
     
     1. Debug: nvm use 14  && yarn serve:uat
     2. Release: 已部署到 薄荷授权 项目的vue3分支  https://uat-boheauth.cxaone.cn
@@ -43,5 +43,3 @@ Depoly:
     
     git commit -a -s -m 'add' && git push origin main
 
-1. Debug: yarn serve ,  账号密码: admin  111111
-2. 

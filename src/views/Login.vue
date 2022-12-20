@@ -5,21 +5,21 @@
     <van-form class="form-wrap" @submit="onSubmit" v-if="type == 'login'">
       <div class="form">
         <van-field
-          clearable
-          v-model="username"
-          name="username"
-          label="账号"
-          placeholder="请输入账号"
-          :rules="[{ required: true, message: '请填写账户' }]"
+            clearable
+            v-model="username"
+            name="username"
+            label="账号"
+            placeholder="请输入账号"
+            :rules="[{ required: true, message: '请填写账户' }]"
         />
         <van-field
-          clearable
-          v-model="password"
-          type="password"
-          name="password"
-          label="密码"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
+            clearable
+            v-model="password"
+            type="password"
+            name="password"
+            label="密码"
+            placeholder="请输入密码"
+            :rules="[{ required: true, message: '请填写密码' }]"
         />
       </div>
       <div style="margin: 16px 0;">
@@ -32,28 +32,28 @@
     <van-form class="form-wrap" @submit="onSubmit" v-if="type == 'register'">
       <div class="form">
         <van-field
-          clearable
-          v-model="username"
-          name="username"
-          label="账号"
-          placeholder="请输入账号"
-          :rules="[{ required: true, message: '请填写账号' }]"
+            clearable
+            v-model="username"
+            name="username"
+            label="账号"
+            placeholder="请输入账号"
+            :rules="[{ required: true, message: '请填写账号' }]"
         />
         <van-field
-          clearable
-          v-model="password"
-          type="password"
-          name="password"
-          label="密码"
-          placeholder="请输入密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
+            clearable
+            v-model="password"
+            type="password"
+            name="password"
+            label="密码"
+            placeholder="请输入密码"
+            :rules="[{ required: true, message: '请填写密码' }]"
         />
         <van-field
-          center
-          clearable
-          label="验证码"
-          placeholder="输入验证码"
-          v-model="verify"
+            center
+            clearable
+            label="验证码"
+            placeholder="输入验证码"
+            v-model="verify"
         >
           <template #button>
             <VueImgVerify ref="verifyRef" />
@@ -67,27 +67,34 @@
         <p @click="chanegType('login')" class="change-btn">登录已有账号</p>
       </div>
     </van-form>
-    <h1>{{ search }}</h1>
-    <button @click="handleSearch">改变查询字段</button>
   </div>
 </template>
 
 <script>
-import { reactive, toRefs, ref, onMounted,watchEffect ,watch} from 'vue'
+import { reactive, toRefs, ref, onMounted, watchEffect, watch, getCurrentInstance, inject } from 'vue'
 import VueImgVerify from '../components/VueImageVerify.vue'
 import Header from '../components/Header.vue'
 import axios from '../utils/axios'
 import { Toast } from 'vant'
-import router from '../router'
+import { vueTools } from 'starkfrontendtools'
+import { useRouter } from 'vue-router'
+import { login } from '@/api'
+
 export default {
   name: 'Login',
   components: {
     VueImgVerify,
     Header
   },
-  setup(props, ctx) {
+  setup (props, ctx) {
+    const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+    console.log('Login.vue  setup getCurrentInstance=',getCurrentInstance())//
+    const global = inject('global')
+    console.log('Login.vue setup global=',global)//
+
+    const router = useRouter()
     const verifyRef = ref(null)
-    let timer = null;
+    let timer = null
     const state = reactive({
       username: '',
       password: '',
@@ -95,49 +102,26 @@ export default {
       verify: '', // 验证码输入框输入的内容
       imgCode: '', // 生成的验证图片内的文字
       loading: false,
-      search: Date.now(),
     })
-
-    // 返回停止函数 https://www.lanqiao.cn/courses/3097/learning/?id=74993
-    const stop = watchEffect((onInvalidate) => {
-      onInvalidate(() => {
-        console.log("onInvalidate 清除");
-        clearInterval(timer);
-      });
-      timer = setTimeout(() => {
-        console.log("模拟 3 秒之后接口返回的详情信息");
-        state.search = Date.now();
-      }, 3000);
-      console.log(`监听查询字段${state.search}`)
-    })
-    const handleSearch = () => {
-      state.search = Date.now();
-    };
-    // setTimeout(() => {
-    //   console.log('执行 stop 停止监听')
-    //   stop() // 2 秒后停止监听行为
-    // }, 2000)
-
-    watch(
-        () => {
-          return state.search;
-        },
-        (nextData, preData) => {
-          console.log("search preData", preData);
-          console.log("search nextData", nextData);
-        }
-    );
 
     // 提交登录 or 注册表单
     const onSubmit = async (values) => {
       try {
         if (state.type == 'login') {
-          const { data } = await axios.post('/user/login', {
-            username: state.username,
-            password: state.password
-          })
-          localStorage.setItem('token', data.token)
-          window.location.href = '/'
+          const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+          console.log('Login.vue 提交登录 getCurrentInstance=',getCurrentInstance())//
+          console.log('Login.vue globalProperties=',globalProperties)//
+          const global = inject('global')
+          console.log('Login.vue onSubmit global=',global)//
+
+          const { code, data } = await login({ username: state.username, password: state.password })
+          console.log('Login.vue login data=', data)
+          if (code === 200) {
+            localStorage.setItem('token', data.token)
+            sessionStorage.setItem('token', data.token)
+            const { redirect } = vueTools.getVue3RouteQuery(router)
+            vueTools.redirectTo(router, redirect)
+          }
         } else {
           state.imgCode = verifyRef.value.imgCode || ''
           if (verifyRef.value.imgCode.toLowerCase() != state.verify.toLowerCase()) {
@@ -155,7 +139,6 @@ export default {
           state.loading = false
         }
       } catch (error) {
-        console.log(111)
         state.loading = false
       }
     }
@@ -169,42 +152,47 @@ export default {
       ...toRefs(state),
       onSubmit,
       chanegType,
-      verifyRef,handleSearch
+      verifyRef
     }
   }
 }
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
-  .auth {
-    height: calc(~"(100% - 46px)");//动态的计算出页面的高度
-    //overflow: hidden;
-    padding: 30px 20px 0 20px;
-    //background: @link-color;
-    .logo {
-      width: 150px;
-      display: block;
-      margin: 0 auto;
-      margin-bottom: 30px;
-    }
-    .form-wrap {
-      .form {
-        border-radius: 10px;
-        overflow: hidden;
-        .van-cell:first-child {
-          padding-top: 20px;
-        }
-        .van-cell:last-child {
-          padding-bottom: 20px;
-        }
+@import url('../config/custom.less');
+
+.auth {
+  height: calc(~"(100% - 46px)"); //动态的计算出页面的高度
+  //overflow: hidden;
+  padding: 30px 20px 0 20px;
+  //background: @link-color;
+  .logo {
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 30px;
+  }
+
+  .form-wrap {
+    .form {
+      border-radius: 10px;
+      overflow: hidden;
+
+      .van-cell:first-child {
+        padding-top: 20px;
+      }
+
+      .van-cell:last-child {
+        padding-bottom: 20px;
       }
     }
-    .change-btn {
-      text-align: center;
-      margin: 10px 0;
-      color: @link-color;
-      font-size: 14px;
-    }
   }
+
+  .change-btn {
+    text-align: center;
+    margin: 10px 0;
+    color: @link-color;
+    font-size: 14px;
+  }
+}
 </style>
