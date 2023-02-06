@@ -2,7 +2,7 @@
   <!--  <div>{{ count }} {{ _count }} {{ data }}</div>-->
   <!--  <p>{{ text }}</p>-->
   <!--  <p>{{ $route.query.count }}</p>-->
-  <div>
+  <div class="page">
     <button @click="min">-</button>
     <span>购物车</span>
     <button @click="add">+</button>
@@ -125,4 +125,7 @@ export default {
 </script>
 
 <style scoped lang='less'>
+.page{
+  //background-color: #4b67e2;
+}
 </style>

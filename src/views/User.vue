@@ -62,7 +62,7 @@ export default {
       })
       state.user = data
       state.signature = data.signature
-    } 
+    }
 
     return {
       ...toRefs(state),
@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .user {
     min-height: 100%;
     background-color: #f5f5f5;
@@ -117,7 +117,7 @@ export default {
 <style lang="less">
   .rate {
     .van-dialog__content {
-      text-align: center;  
+      text-align: center;
       padding: 20px 0;
     }
   }

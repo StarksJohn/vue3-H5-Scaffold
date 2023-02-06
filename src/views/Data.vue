@@ -151,7 +151,7 @@ export default {
         })
       }
     }
-    
+
     // 月份弹窗开关
     const monthToggle = () => {
       popMonthRef.value.toggle()
@@ -175,7 +175,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .data {
     min-height: 100%;
     background-color: #f5f5f5;

@@ -67,7 +67,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .pop {
     position: relative;
     background-color: #f5f5f5;

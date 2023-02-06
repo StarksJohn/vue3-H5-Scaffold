@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .detail {
     height: 100%;
     display: flex;

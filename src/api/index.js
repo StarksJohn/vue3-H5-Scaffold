@@ -24,9 +24,9 @@ export const getUserInfoAPI = async () => {
 const headers = () => {
   return {
     'Authorization': `${sessionStorage.getItem('token') || null}`,
-    post:{
-      'Content-Type':'application/json'
-    }
+    // post:{
+    //   'Content-Type':'application/json'
+    // }
   }
 }
 
@@ -34,7 +34,7 @@ const baseURL=process.env.NODE_ENV == 'development' ? '/api' : '//47.99.134.126:
 
 const processCode = (data) => {
   console.log('processCode data=', data)
-  if (data.code !== 0) {
+  if (data.code !== 200) {
     if (data.code === 401) {
       console.log('processCode 401 router=',router)
       store.dispatch('setToken', null).then()
@@ -68,7 +68,7 @@ export const login = async (params) => {
   console.log('login data=', data)
   console.log('login err=', err)
   if (data && processCode(data) && !err) {
-    return Promise.resolve(data.data)
+    return Promise.resolve(data)
   } else {
     return processErr(err)
   }

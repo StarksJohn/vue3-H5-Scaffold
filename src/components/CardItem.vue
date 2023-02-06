@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .item {
     border-radius: 10px;
     overflow: hidden;
@@ -97,7 +97,7 @@ export default {
   }
 </style>
 <style lang='less'>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .expense {
     .van-cell__value {
       color: @color-text-base!important;
@@ -108,5 +108,5 @@ export default {
       color: @text-warning!important;
     }
   }
-  
+
 </style>

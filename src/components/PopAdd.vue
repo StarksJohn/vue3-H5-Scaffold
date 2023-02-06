@@ -200,7 +200,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .add-wrap {
     padding-top: 12px;
     .header {

@@ -41,7 +41,7 @@ export default {
 </script>
 
 <style lang="less">
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .van-tabbar-item--active {
     color: @primary!important;
   }

@@ -23,9 +23,9 @@ const router = createRouter({
       redirect: routerPath.home
     },
     {
-      path: routerPath.home,
-      name: 'Home',
-      component: Home, meta: { requiresAuth: true }
+      path: routerPath.home,//路由指向的 URL 路径
+      name: 'Home',//路由指向这个页面时使用的名字
+      component: Home, meta: { requiresAuth: true }//路由调用此页面时，要加载的组件
     },
     {
       path: routerPath.data,

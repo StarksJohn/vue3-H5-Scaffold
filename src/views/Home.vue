@@ -146,7 +146,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import url('../config/custom.less');
+@import url('../style/custom.less');
 
 .home {
   background-color: #4b67e2;

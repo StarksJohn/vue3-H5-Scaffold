@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import url('../config/custom.less');
+@import url('../style/custom.less');
 
   .block {
     width: 100%;

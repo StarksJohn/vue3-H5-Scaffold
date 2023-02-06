@@ -116,10 +116,11 @@ export default {
 
           const { code, data } = await login({ username: state.username, password: state.password })
           console.log('Login.vue login data=', data)
-          if (code === 200) {
+          if (data.token) {
             localStorage.setItem('token', data.token)
             sessionStorage.setItem('token', data.token)
             const { redirect } = vueTools.getVue3RouteQuery(router)
+            console.log('Login.vue login redirect=', redirect)
             vueTools.redirectTo(router, redirect)
           }
         } else {
@@ -159,7 +160,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-@import url('../config/custom.less');
+@import url('../style/custom.less');
 
 .auth {
   height: calc(~"(100% - 46px)"); //动态的计算出页面的高度

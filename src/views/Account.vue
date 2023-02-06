@@ -80,11 +80,11 @@ export default {
 </script>
 
 <style lang="less">
-  @import url('../config/custom.less');
+  @import url('../style/custom.less');
   .account {
     min-height: 100%;
     background-color: #f5f5f5;
-    
+
     .logout {
       display: block;
       margin: 0 auto;

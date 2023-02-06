@@ -25,7 +25,7 @@ use:
   1: 在 <template> 里 直接 用 {{ $filters.transDay(date) }}
   2: 在 setup 方法里,
     import { getCurrentInstance } from 'vue'
-    const globalProperties = getCurrentInstance()?.appContext.config.globalProperties
+    const globalProperties = getCurrentInstance()?.appContext.style.globalProperties
     console.log(globalProperties?.$filter.bar())
   3 坑: getCurrentInstance 方法 无法再 setup 外部调用到数据,也无法在setup内部定义的方法里调用 ,故 只能把全局变量挂到 window 上
  */
