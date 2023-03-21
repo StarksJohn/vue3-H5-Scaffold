@@ -3,6 +3,8 @@ vue3+JS 用于 H5 项目的 脚手架
     分支: main  基于 https://github.com/Nick930826/daily-cost (对应 https://www.lanqiao.cn/courses/3097 这个 电子书) , https://github.
     com/newbee-ltd/newbee-mall-vue3-app, https://github.com/kalacloudCode/vue-axios-example ,https://git.cxaone.cn/Stark/zhongyi 这几个JS项目
 
+项目node版本号: https://hsbc-wsmp-static.cxaone.cn/E789ADF7-9C95-4736-8302-3B4F65B1771B.png
+
 项目搭建:  npm  i
         
     1 添加路由 Vue-Router 4.x  https://www.lanqiao.cn/courses/3097/learning/?id=74991  https://www.lanqiao.cn/courses/3097/learning/?id=75150
